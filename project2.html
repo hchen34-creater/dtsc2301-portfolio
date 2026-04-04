@@ -170,7 +170,7 @@ df["Num_Platforms"] = df["Platforms"].str.split(",").str.len()
 
 df = df.drop(columns=["Platforms", "Organization", "Relationship", "Occupation"])
 df = df.dropna()</div>
-    <div class="nb-explain"><strong>isnull().sum()</strong> checks for empty cells per column. Organization had 30 missing<br><br><strong>df.drop()</strong> removes columns i dont need. Timestamp is just when they took it and Uses_SM is useless since everyone said yes<br><br><strong>df.dropna()</strong> removes rows with empty cells<br><br><strong>time_map</strong> and <strong>.map()</strong> converts text answers like "Between 2 and 3 hours" into numbers like 2.5. the model cant read text so everything needs to be a number<br><br><strong>df["Gender"].map()</strong> same thing, turns Male/Female/Nonbinary into 0/1/2<br><br><strong>str.split(",").str.len()</strong> the Platforms column had stuff like "Facebook, Instagram, YouTube". split breaks it at each comma, len counts how many. 3 platforms = 3<br><br>dropped the remaining text columns after that and did one more dropna to catch anything that didnt map correctly</div></div>
+    <div class="nb-explain"><strong>isnull().sum()</strong> checks for empty cells per column. Organization had 30 missing<br><br><strong>df.drop()</strong> removes columns i dont need. Timestamp is just when they took it and Uses_SM is useless since everyone said yes<br><br><strong>df.dropna()</strong> removes rows with empty cells<br><br><strong>time_map</strong> and <strong>.map()</strong> converts text answers like "Between 2 and 3 hours" into numbers like 2.5. the model cant read text so everything needs to be a number<br><br><strong>df["Gender"].map()</strong> same thing, turns Male/Female/Nonbinary into 0/1/2<br><br><strong>str.split(",").str.len()</strong> the Platforms column had stuff like "Facebook, Instagram, YouTube". split breaks it at each comma, len counts how many. 3 platforms = 3</div></div>
 
   <div class="nb-cell"><div class="nb-cell-header">[ 4 ] target variable</div><div class="nb-code">df["MH_Score"] = (df["Bothered_Worries"] + df["Hard_Concentrate"] +
                   df["Feel_Depressed"] + df["Interest_Fluctuate"] + df["Sleep_Issues"])
@@ -202,7 +202,7 @@ dt_scores = cross_val_score(dt, X_train_scaled, y_train, cv=5, scoring="accuracy
 
 rf = RandomForestClassifier(random_state=42, n_estimators=100, max_depth=5)
 rf_scores = cross_val_score(rf, X_train_scaled, y_train, cv=5, scoring="accuracy")</div>
-    <div class="nb-explain"><strong>LogisticRegression</strong> simplest model, gives each person a probability and splits at 0.5<br><br><strong>DecisionTreeClassifier</strong> makes yes/no splits on the data like a flowchart. max_depth=5 stops it from going too deep and memorizing the data<br><br><strong>RandomForestClassifier</strong> builds 100 trees (n_estimators=100) and averages their votes<br><br><strong>cross_val_score</strong> with cv=5 splits the training data 5 ways, trains on 4 parts tests on 1, rotates 5 times, averages the accuracy. more reliable than testing once<br><br>LR got 0.77, DT got 0.74, RF got 0.76</div></div>
+    <div class="nb-explain"><strong>LogisticRegression</strong> simplest model, gives each person a probability and splits at 0.5<br><br><strong>DecisionTreeClassifier</strong> makes yes/no splits on the data like a flowchart. max_depth=5 stops it from going too deep and memorizing the data<br><br><strong>RandomForestClassifier</strong> builds 100 trees (n_estimators=100) and averages their votes<br><br><strong>cross_val_score</strong> with cv=5 splits the training data 5 ways, trains on 4 parts tests on 1, rotates 5 times, averages the accuracy. more reliable than testing once</div></div>
 
   <div class="nb-cell"><div class="nb-cell-header">[ 7 ] evaluate</div><div class="nb-code">lr.fit(X_train_scaled, y_train)
 lr_pred = lr.predict(X_test_scaled)
@@ -217,7 +217,7 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
 rf.fit(X_train_scaled, y_train)
 feat_imp = pd.DataFrame({"Feature": feature_cols, "Importance": rf.feature_importances_})
 feat_imp = feat_imp.sort_values("Importance", ascending=False)</div>
-    <div class="nb-explain"><strong>confusion_matrix</strong> makes a 2x2 grid. got 40 low right, 29 high right, missed 12 high and 9 low<br><br><strong>sns.heatmap</strong> draws it as a colored grid. annot=True puts numbers in the cells<br><br><strong>rf.feature_importances_</strong> shows which features the model relied on most. used random forest for this since logistic regression doesnt have it built in the same way<br><br>top predictors were Easily_Distracted (0.27) and Compare_Others (0.13). time spent and number of platforms barely mattered</div></div>
+    <div class="nb-explain"><strong>confusion_matrix</strong> makes a 2x2 grid. got 40 low right, 29 high right, missed 12 high and 9 low<br><br><strong>sns.heatmap</strong> draws it as a colored grid. annot=True puts numbers in the cells<br><br><strong>rf.feature_importances_</strong> shows which features the model relied on most. used random forest for this since logistic regression doesnt have it built in the same way<br><br>top predictors were Easily_Distracted (0.27) and Compare_Others (0.13)</div></div>
 </section>
 
 <section id="refs">
