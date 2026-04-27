@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Post 2 | HC's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c8f0a0;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--text); }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .post-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+
+    .post-body p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #d0d0d0;
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">HC's Portfolio</a>
+  <nav>
+    <a href="index.html">Projects</a>
+    <a href="blog.html" class="active">Blog</a>
+  </nav>
+</header>
+
+<main>
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+
+  <p class="post-label">02 — Week 2</p>
+  <h1>Ethically ambiguous data modeling</h1>
+
+  <div class="post-body">
+    <p>Data modeling gets described as neutral: choose features, train a model, check accuracy, move on. But the more I learn, the more I think modeling often lives in a gray zone. To me, ethically ambiguous data modeling is when a model can be built "correctly" from a technical standpoint, but it still raises real questions about fairness, responsibility, and who might pay the price for mistakes. The ambiguity usually isn't because someone is trying to be unethical. It's because the data is incomplete, the labels are imperfect, and the model ends up optimizing what's measurable, not always what's socially "right." On top of that, the same model can help one group while quietly hurting another.</p>
+
+    <p>Three practices feel especially important for handling that uncertainty. First, slow down and audit the data before trusting it. Where did it come from? Who is missing? What does the label mean? A "clean" dataset can still reflect biased systems, and variables like ZIP code can act as proxies for race or income without saying so out loud. Second, make the model explainable and document decisions. If a model affects people (money, school, jobs, health), then the choices behind it shouldn't be a black box. Clear documentation also forces you to admit tradeoffs instead of hiding them. Third, measure impact after deployment, not just accuracy. A model can score well and still create unequal outcomes in the real world, so ongoing monitoring and updates matter.</p>
+
+    <p>A good example is a lending model that predicts default risk. It might "work" statistically, but if it relies heavily on credit history and neighborhood patterns, it can repeat past inequities. That's what makes it ethically ambiguous: it's not obviously illegal or obviously evil, but the consequences can still be unfair.</p>
+  </div>
+</main>
+
+<footer>Haoran Chen / DTSC 2301 / Spring 2026</footer>
+
+</body>
+</html>

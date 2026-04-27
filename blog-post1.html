@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Post 1 | HC's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c8f0a0;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--text); }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .post-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+
+    .post-body p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #d0d0d0;
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">HC's Portfolio</a>
+  <nav>
+    <a href="index.html">Projects</a>
+    <a href="blog.html" class="active">Blog</a>
+  </nav>
+</header>
+
+<main>
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+
+  <p class="post-label">01 — Intro Post</p>
+  <h1>Why learning data science in social and interdisciplinary contexts matters</h1>
+
+  <div class="post-body">
+    <p>When people talk about data science, it's easy to imagine it as something purely technical: code, charts, predictions, and dashboards. But the reason I'm excited to learn it is that many of the questions I care about are social questions. Education, health, employment, housing, and public policy are all shaped by human decisions and systems. Data science gives us tools to look at patterns across a community instead of only seeing individual cases. It can help us test ideas, evaluate interventions, and communicate evidence in a way that supports better decisions.</p>
+
+    <p>At the same time, modeling social topics and people comes with real responsibility. People are not just rows in a spreadsheet, and data is never a perfect mirror of reality. What we measure, how we collect it, and who gets included all matter. Sometimes missing data isn't random — it reflects barriers, inequality, or limited access. Labels can also be subjective (for example, what counts as "success," "risk," or "needs help"), and if those labels are biased, models can carry that bias forward.</p>
+
+    <p>Using data about people makes me think about privacy and consent first, but it goes beyond that. I think responsibility also means being transparent about limitations, avoiding overconfident claims, and checking whether results affect groups differently. It means asking: Who benefits from this analysis? Who could be harmed? What assumptions am I making? Even a well-built model can be used in a harmful way if it becomes the only thing decision-makers look at.</p>
+
+    <p>Through this course, I'm hoping to learn how to connect methods to meaning. I want to get better at exploring datasets thoughtfully, building clear visualizations, and using models as tools for understanding rather than as "final answers." Most of all, I want to practice communicating results in a way that respects context, uncertainty, and the fact that real people live behind the data.</p>
+  </div>
+</main>
+
+<footer>Haoran Chen / DTSC 2301 / Spring 2026</footer>
+
+</body>
+</html>

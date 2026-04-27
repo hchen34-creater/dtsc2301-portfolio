@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Post 3 | HC's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #c8f0a0;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--text); }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .post-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+
+    .post-body p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #d0d0d0;
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">HC's Portfolio</a>
+  <nav>
+    <a href="index.html">Projects</a>
+    <a href="blog.html" class="active">Blog</a>
+  </nav>
+</header>
+
+<main>
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+
+  <p class="post-label">03 — Week 5</p>
+  <h1>Social Determinants of Health and the Capabilities Approach</h1>
+
+  <div class="post-body">
+    <p>I used to hear "health" and think about doctors, prescriptions, and maybe going to the gym. Lately, I've been realizing that a lot of health gets decided way earlier — in your schedule, your neighborhood, and the stuff you can or can't afford.</p>
+
+    <p>To me, the Social Determinants of Health are the everyday conditions that shape how hard life feels to manage. It's things like: how stable your income is, whether your housing is safe and not full of stress, how long it takes to get to work or class, what food options are nearby, and whether you feel safe walking outside. Even "small" stuff matters, like if your internet drops all the time — suddenly applying for jobs, scheduling appointments, or even submitting assignments turns into a constant problem. SDOH aren't just background details; they're basically the "rules of the game" people are playing.</p>
+
+    <p>The Capabilities Approach makes this click for me because it focuses on what people can actually do. I think of capabilities as your real freedom to live the life you value — not what looks possible on paper, but what's truly available in your situation. Nussbaum also emphasizes that people should have certain basic capabilities, like bodily health, learning, safety, and participation in community because they're tied to dignity.</p>
+
+    <p>A simple example: someone can be told, "get more sleep" or "exercise to reduce stress." But if they work late shifts, live in a noisy place, or don't feel safe outside, then those aren't realistic choices. I've felt a version of this myself during weeks when my schedule gets packed especially around training weekends: meals get rushed, sleep gets shorter, and the "healthy option" isn't just about motivation — it's about time, stability, and recovery.</p>
+
+    <p>So the connection is pretty direct: SDOH shape capabilities, and capabilities are what turn those conditions into well-being. Two people might want the same thing — less stress, better health, more stability — but one person has room to act, and the other is constantly forced into trade-offs.</p>
+
+    <p>If I were trying to measure this, I'd look at SDOH like: income stability, housing quality and cost burden, food security, commute time, neighborhood safety, broadband access, access to parks and green space, and experiences of discrimination. For capabilities, I'd look at: how much control someone feels over their schedule, whether they can access care when needed, time available for sleep and exercise, social support, and whether they can meet basic goals without sacrificing something essential.</p>
+  </div>
+</main>
+
+<footer>Haoran Chen / DTSC 2301 / Spring 2026</footer>
+
+</body>
+</html>
