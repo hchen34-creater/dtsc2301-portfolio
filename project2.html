@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 2: Social Media & Mental Health - HC's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --accent: #5b8dee;
+      --text: #e8eaf0;
+      --muted: #8b90a7;
+      --border: #2d3148;
+      --success: #3ecf8e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.75; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.93); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      height: 56px;
+    }
+    .nav-brand { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--accent); text-decoration: none; margin-right: auto; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    nav a:hover { color: var(--text); }
+    .nav-badge { background: var(--accent); color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.78rem; }
+
+    .hero { padding: 80px 2rem 60px; max-width: 860px; margin: 0 auto; text-align: center; }
+    .hero-label { display: inline-block; color: var(--muted); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; margin-bottom: 1rem; }
+    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 580px; margin: 0 auto; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+    .section-num { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    h2 { font-family: 'DM Serif Display', serif; font-size: 1.85rem; margin-bottom: 1.2rem; color: var(--text); }
+    h3 { font-size: 1.05rem; font-weight: 600; margin: 1.8rem 0 0.5rem; color: var(--text); }
+
+    p { margin-bottom: 1rem; color: var(--text); }
+
+    .rq { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+    .rq p { margin: 0; font-style: italic; color: var(--text); }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem; text-align: center; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.76rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .fig { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 2rem 0; }
+    .fig img { width: 100%; display: block; }
+    .fig-caption { padding: 1rem 1.2rem; }
+    .fig-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--text); }
+    .fig-text { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin: 0; }
+
+    .model-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+    .model-table th { text-align: left; padding: 0.6rem 1rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); border-bottom: 1px solid var(--border); }
+    .model-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .model-table tr:last-child td { border-bottom: none; }
+    .model-table tr.selected td { background: rgba(91,141,238,0.05); }
+    .acc { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--accent); }
+    .sel-tag { font-size: 0.7rem; background: var(--accent); color: white; padding: 1px 7px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+
+    .metrics-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+    .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; }
+    .metric-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .metric-val { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--success); }
+    .metric-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.4; }
+
+    .code-cell { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 1.5rem 0; }
+    .code-cell-header { background: var(--surface2); padding: 0.45rem 1rem; font-size: 0.74rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+    .cell-num { background: var(--accent); color: white; padding: 1px 7px; border-radius: 3px; font-size: 0.68rem; }
+    pre { padding: 1rem 1.2rem; font-size: 0.81rem; overflow-x: auto; line-height: 1.65; color: #abb2bf; }
+    .code-note { padding: 0.75rem 1.2rem; font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); background: var(--bg); }
+    .code-note code { color: var(--accent); font-size: 0.82rem; }
+
+    .ref-list { list-style: none; }
+    .ref-list li { padding: 0.9rem 0 0.9rem 2.5rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; line-height: 1.65; position: relative; }
+    .ref-list li:last-child { border-bottom: none; }
+    .ref-list a { color: var(--accent); text-decoration: none; }
+    .ref-num { position: absolute; left: 0; top: 0.95rem; background: var(--accent); color: white; font-size: 0.7rem; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+
+    sup a { color: var(--accent); font-size: 0.7rem; text-decoration: none; }
+    .cite-tag {
+      display: inline-block;
+      background: rgba(91,141,238,0.15);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(91,141,238,0.35);
+      vertical-align: middle;
+      margin-left: 3px;
+      cursor: default;
+      position: relative;
+    }
+    .cite-tag:hover .cite-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .cite-tooltip {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: all 0.2s;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      translate: -50%;
+      width: 280px;
+      background: #1e2235;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--text);
+      line-height: 1.5;
+      z-index: 99;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      font-weight: 400;
+      white-space: normal;
+    }
+
+    @media (max-width: 640px) { nav a:not(.nav-brand):not(.nav-badge) { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">HC's Portfolio</a>
+  <a href="index.html">Home</a>
+  <a href="project1.html">Project 1</a>
+  <a href="#problem">Problem</a>
+  <a href="#data">Data</a>
+  <a href="#models">Models</a>
+  <a href="#results">Results</a>
+  <a href="#refs">References</a>
+  <a href="project2_technical_report.html" class="nav-badge">Technical Report</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">DTSC 2301 / Project 2</div>
+  <h1>Social Media &amp; Mental Health</h1>
+  <p>Can we predict whether someone experiences high mental health impact from their social media habits?</p>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="section-num">01 / Problem</div>
+    <h2>Why This Matters</h2>
+
+    <p>Social media plays a significant role in the daily routines of college-aged students. Research published in the <em>Journal of Social and Clinical Psychology</em> found that limiting social media use to 30 minutes per day produced meaningful reductions in loneliness and depression among undergraduates, pointing to a real connection between platform usage and mental health outcomes.<span class="cite-tag">1<span class="cite-tooltip"><strong>Hunt et al. (2018)</strong> — "No More FOMO: Limiting Social Media Decreases Loneliness and Depression." Journal of Social and Clinical Psychology, 37(10), 751-768.</span></span> According to a 2018 Pew Research Center report, 70% of American adults use social media, with 18-to-29-year-olds reporting the highest usage rates of any age group.<span class="cite-tag">2<span class="cite-tooltip"><strong>Smith &amp; Anderson (2018)</strong> — "Social Media Use in 2018." Pew Research Center. pewresearch.org</span></span> That concentration among college-aged users makes this population particularly relevant for study.</p>
+
+    <p>The legal and public health dimensions of this issue have grown substantially. On March 25, 2026, a Los Angeles jury found Meta and Google liable in a civil lawsuit brought by a 20-year-old plaintiff who alleged that algorithmic social media exposure beginning at age 6 contributed to anxiety, body dysmorphia, and suicidal ideation. The jury awarded $6 million in damages in the first jury verdict of its kind, with over 1,500 similar cases pending. Legal commentators have compared the proceedings to the tobacco industry litigation of the 1990s.<span class="cite-tag">3<span class="cite-tooltip"><strong>AP News (March 25, 2026)</strong> — "Jury finds Meta and Google liable in social media mental health case, awards $6 million."</span></span></p>
+
+    <p>This project uses machine learning classification on survey data to explore whether a person's social media behaviors can predict their likelihood of experiencing elevated mental health impact, and which specific behaviors carry the most predictive weight.</p>
+
+    <div class="rq">
+      <p><strong>Research Question:</strong> Can we predict whether a person experiences high mental health impact based on their social media usage patterns, and which behaviors are the strongest predictors?</p>
+    </div>
+  </div>
+</section>
+
+<!-- DATA -->
+<section id="data">
+  <div class="container">
+    <div class="section-num">02 / Data</div>
+    <h2>About the Dataset</h2>
+
+    <p>The dataset is the <em>Social Media and Mental Health</em> survey collected by Souvik Ahmed and published on Kaggle.<span class="cite-tag">4<span class="cite-tooltip"><strong>Ahmed, S. (2023)</strong> — "Social Media and Mental Health" dataset. Kaggle. kaggle.com/datasets/souvikahmed071/social-media-and-mental-health</span></span> It was administered as a Google Form and contains self-reported responses across three broad areas: demographics (age, gender, relationship status, occupation), social media habits (platforms used, average daily time, reasons for use), and mental health indicators rated on 1-to-5 Likert scales covering difficulty concentrating, depression, anxiety, sleep disturbances, social comparison, and validation-seeking behavior. Each row is one anonymous respondent.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-num">481</span><div class="stat-label">Total responses</div></div>
+      <div class="stat"><span class="stat-num">20</span><div class="stat-label">Survey questions</div></div>
+      <div class="stat"><span class="stat-num">446</span><div class="stat-label">After cleaning</div></div>
+      <div class="stat"><span class="stat-num">11</span><div class="stat-label">Predictive features</div></div>
+    </div>
+
+    <p>To build the target variable, five of the mental health Likert-scale questions were summed into a composite score: frequency of worry, difficulty concentrating, frequency of depression, interest fluctuation, and sleep issues. The median composite score was 17. Respondents above that threshold were labeled <strong>High Impact (1)</strong> and those at or below it were labeled <strong>Low Impact (0)</strong>, producing 203 high-impact and 243 low-impact cases. The split is reasonably balanced, which is preferable for binary classification since a heavily skewed class distribution can cause models to simply default to the majority label.</p>
+
+    <h3>Preprocessing</h3>
+
+    <p>Several cleaning and encoding steps were applied before modeling. The <em>Timestamp</em> column was dropped because when someone submitted the survey has no meaningful relationship to their mental health outcomes. <em>Uses_SM</em> was also removed since every respondent answered yes, making it a zero-variance column that adds no information to the model.</p>
+
+    <p>The average daily usage column was originally stored as text ranges like "Between 2 and 3 hours." These were converted to their midpoint numeric values (2.5 in that example) so the model could treat them mathematically. The underlying assumption is that responses within a given range are roughly centered around the midpoint, which is a reasonable approximation for survey data. Gender was label-encoded as Male=0, Female=1, Non-binary/Transgender=2. This introduces an implied ordinal relationship that does not actually exist, and one-hot encoding would be more technically correct; in practice, given the small number of non-binary respondents and the models used here, the effect on results is expected to be minor.</p>
+
+    <p>For the platforms variable, which stored comma-separated lists of platforms each person uses, a new numeric feature (<em>Num_Platforms</em>) was created by counting the number of entries per row. This captures how broadly someone engages across platforms without requiring a separate column for each one.</p>
+
+    <p>Finally, StandardScaler was applied to all features after the train/test split. Fitting the scaler only on training data and then applying it to the test set is important to prevent data leakage. Scaling is necessary here because the features operate on very different numerical ranges: age can reach the mid-30s while Likert-scale variables only span 1 to 5, and without normalization the model would implicitly treat higher-magnitude variables as more important just because of their scale.</p>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section id="models">
+  <div class="container">
+    <div class="section-num">03 / Models</div>
+    <h2>Three Models Compared</h2>
+
+    <p>Three classification algorithms were evaluated using 5-fold cross-validation on the training set. Cross-validation splits the training data into five equal subsets, trains on four of them, validates on the fifth, and rotates through all five combinations before averaging the accuracy scores. This gives a more stable performance estimate than a single split because it is less sensitive to how any one particular partition happened to divide the data.</p>
+
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>CV Accuracy</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="selected">
+          <td>Logistic Regression <span class="sel-tag">selected</span></td>
+          <td><span class="acc">76.97%</span></td>
+          <td>Linear model that outputs a probability for each case. Achieved the highest cross-validation accuracy and produces interpretable coefficients, meaning each feature's contribution to the prediction can be read directly from the model weights.</td>
+        </tr>
+        <tr>
+          <td>Random Forest</td>
+          <td><span class="acc">75.57%</span></td>
+          <td>Ensemble of 100 decision trees that vote on the final label. Finished second. Used separately to extract feature importance scores, which are more reliable from a forest than from a single tree.</td>
+        </tr>
+        <tr>
+          <td>Decision Tree (depth 5)</td>
+          <td><span class="acc">73.60%</span></td>
+          <td>A single tree capped at depth 5 to prevent overfitting. Performed lowest of the three, suggesting the data benefits from a more linear or ensemble approach at this sample size.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="fig">
+      <img src="images_p2/fig4_model_comparison.png" alt="Bar chart comparing 5-fold cross-validation accuracy across Logistic Regression, Random Forest, and Decision Tree" />
+      <div class="fig-caption">
+        <div class="fig-title">Figure 4. Cross-Validation Accuracy Comparison</div>
+        <p class="fig-text">All three models land in the 73-77% range, with only about 3 percentage points separating the best and worst performers. The narrow gap suggests that the features in this dataset carry a real but modest signal. Logistic Regression's slight advantage may indicate that the relationship between social media behaviors and mental health impact is more linear than tree-based boundaries can capture in a dataset of this size.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="container">
+    <div class="section-num">04 / Results</div>
+    <h2>What the Data Shows</h2>
+
+    <div class="fig">
+      <img src="images_p2/fig1_target_dist.png" alt="Bar chart showing count of high versus low mental health impact labels in the cleaned dataset" />
+      <div class="fig-caption">
+        <div class="fig-title">Figure 1. Target Variable Distribution</div>
+        <p class="fig-text">After cleaning, the dataset contains 243 low-impact and 203 high-impact respondents, a 54%/46% split. A balanced class distribution like this is important because a heavily skewed one can cause a classifier to learn nothing useful and simply predict the majority class. The balance here means the model has to genuinely distinguish between the two groups to perform well.</p>
+      </div>
+    </div>
+
+    <div class="fig">
+      <img src="images_p2/fig2_time_vs_impact.png" alt="Side-by-side box plots of average daily social media use in hours, split by high and low mental health impact groups" />
+      <div class="fig-caption">
+        <div class="fig-title">Figure 2. Daily Social Media Time by Impact Group</div>
+        <p class="fig-text">The high-impact group shows a slightly higher median daily usage, but the two distributions overlap substantially. That overlap tells a clear story: time spent on social media is not, on its own, a reliable predictor of mental health impact. Plenty of heavy users fall in the low-impact group and vice versa. This points toward the importance of behavioral and psychological features over raw time, a pattern the feature importance analysis in Figure 6 confirms more precisely.</p>
+      </div>
+    </div>
+
+    <div class="fig">
+      <img src="images_p2/fig3_correlation.png" alt="Heatmap of Pearson correlations among the survey's mental health and usage features" />
+      <div class="fig-caption">
+        <div class="fig-title">Figure 3. Feature Correlation Matrix</div>
+        <p class="fig-text">The strongest correlations cluster among the mental health indicator variables. <em>Compare_Others</em> (how often someone compares themselves to others online) is strongly associated with both <em>Seek_Validation</em> and <em>Feel_Depressed</em>. This aligns with social comparison theory: repeatedly measuring yourself against curated, idealized portrayals of other people tends to erode self-esteem and is linked to depressive symptoms. By contrast, <em>Avg_Time</em> shows only weak correlations with most mental health features, reinforcing the finding from Figure 2 that usage time alone is not the driving variable.</p>
+      </div>
+    </div>
+
+    <div class="fig">
+      <img src="images_p2/fig5_confusion_matrix.png" alt="Confusion matrix showing true positives, true negatives, false positives, and false negatives for Logistic Regression on the test set" />
+      <div class="fig-caption">
+        <div class="fig-title">Figure 5. Confusion Matrix (Logistic Regression, Test Set)</div>
+        <p class="fig-text">On 90 test cases, the model correctly identified 40 of 49 low-impact individuals and 29 of 41 high-impact individuals. It produced 9 false negatives (predicted low impact for someone who was actually high impact) and 12 false positives. In a mental health context, false negatives are the more consequential error type because they represent individuals with elevated symptoms who go undetected. The model's precision and recall for the high-impact class both come out around 71%, indicating it handles both classes comparably rather than being biased toward one. With 20 total misclassifications out of 90, the overall test accuracy is 76.67%, which is close to the cross-validation estimate of 76.97% and suggests the model is generalizing rather than overfitting.</p>
+      </div>
+    </div>
+
+    <h3>Model Evaluation Summary</h3>
+
+    <div class="metrics-row">
+      <div class="metric">
+        <div class="metric-label">Test Accuracy</div>
+        <div class="metric-val">76.67%</div>
+        <div class="metric-sub">69 of 90 test cases correctly classified.</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">CV Accuracy</div>
+        <div class="metric-val">76.97%</div>
+        <div class="metric-sub">Average across 5 validation folds. The small gap between CV and test accuracy indicates the model has not overfit to training data.</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Precision (High)</div>
+        <div class="metric-val">71%</div>
+        <div class="metric-sub">Of all cases the model predicted as high impact, 71% were correct.</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Recall (High)</div>
+        <div class="metric-val">71%</div>
+        <div class="metric-sub">Of all truly high-impact cases, the model correctly identified 71% of them.</div>
+      </div>
+    </div>
+
+    <div class="fig">
+      <img src="images_p2/fig6_feature_importance.png" alt="Horizontal bar chart ranking features by their importance scores from the Random Forest model" />
+      <div class="fig-caption">
+        <div class="fig-title">Figure 6. Feature Importance (Random Forest)</div>
+        <p class="fig-text">The Random Forest importance scores rank <em>Easily_Distracted</em> and <em>Compare_Others</em> as the top two predictors by a notable margin. The practical meaning of this is that how a person engages with social media matters more than how much time they spend on it. Someone who habitually compares their life to others' online, or whose attention fragments across constant notifications and scrolling, shows a stronger association with elevated mental health impact than someone who simply logs many hours. <em>Avg_Time</em> ranks in the middle of the feature list, consistent with what Figure 2 showed. From an intervention standpoint, this suggests that efforts focused on reducing comparison-driven usage and supporting attentional habits could have more impact than broad screen time limits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIMITATIONS -->
+<section id="limitations">
+  <div class="container">
+    <div class="section-num">05 / Limitations, Ethics &amp; Reflection</div>
+    <h2>Limitations</h2>
+
+    <p>The cleaned dataset contains 446 responses. That is enough for an exploratory analysis but limits statistical power, and without documentation of how and where the survey was distributed, it is difficult to assess who is or is not represented. The findings cannot safely be generalized to broader populations without validation on larger, more diverse data.</p>
+
+    <p>Because all data is self-reported, two well-documented biases apply. First, recall bias: people estimating their daily social media time are often inaccurate, and studies comparing self-reports to device-tracked usage consistently find divergence in both directions.<span class="cite-tag">5<span class="cite-tooltip"><strong>Vanden Abeele et al. (2013)</strong> — "Measuring mobile phone use: Gender, age and real usage behaviour in relation to different measures of mobile phone use." Mobile Media &amp; Communication, 1(2), 213-236.</span></span> Second, social desirability bias: respondents may underreport mental health difficulties due to stigma. Both biases can weaken the signal the model is trying to learn from.</p>
+
+    <p>The "High Impact" label is a methodological construct, not a clinically validated definition. It was built by selecting five questions, summing them, and splitting at the median. A different choice of questions, a different split point, or the use of an established scale such as the PHQ-9 would likely produce a different target variable and potentially different results. This is one of the more significant limitations of the project and something to address in future work.</p>
+
+    <p>It is also important to note that the model identifies statistical associations, not causal relationships. The analysis cannot establish that social media use causes mental health problems. It is equally plausible that individuals already experiencing difficulties turn to social media more heavily, or that third variables such as loneliness, academic stress, or socioeconomic factors drive both. All three models also plateaued around 73-77% accuracy, meaning roughly one in four predictions on the test set was wrong. Human mental health is complex, and a 20-question survey captures only a small slice of the factors involved.</p>
+
+    <h3>Ethical Considerations</h3>
+
+    <p>This model was trained on anonymous survey data and identifies group-level statistical patterns. It was not designed to evaluate individuals and should not be used for individual screening in clinical, educational, or employment contexts. A false negative in a real-world setting could mean someone with elevated symptoms goes unidentified; a false positive could carry a stigmatizing label for someone who does not need one. Mental health assessment requires trained clinicians and validated instruments, and this project does not substitute for either.</p>
+
+    <p>It is also worth noting that the populations most affected by social media-related mental health harms, including adolescents and individuals with pre-existing conditions, are not represented in this dataset, which skews toward college-aged adults. Any recommendations informed by this type of research should account for those gaps and prioritize the needs of more vulnerable groups.</p>
+
+    <h3>Reflection</h3>
+
+    <p>Working through this project made clear how much the methodological choices made early on shape everything that follows. Deciding which questions to include in the composite score, where to place the split threshold, and which features to use in the model all involve judgment calls that another researcher might make differently and arrive at different conclusions. If I were to continue this work, replacing the custom composite score with a validated clinical scale would be an important first step toward making the results more defensible. The feature importance finding also changed my thinking: I went into this expecting time spent on social media to be the dominant predictor, and it turned out to rank in the middle of the feature list. The data suggests that the quality of how people engage matters more than the quantity, which is a more nuanced finding than the typical "just use your phone less" framing.</p>
+  </div>
+</section>
+
+<!-- CODE -->
+<section id="code">
+  <div class="container">
+    <div class="section-num">06 / Code</div>
+    <h2>Code</h2>
+    <p>Ran in Google Colab. Annotated below.</p>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">1</span> imports</div>
+      <pre>import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix</pre>
+      <div class="code-note">pandas for tabular data; numpy for math; seaborn and matplotlib for charts; scikit-learn for splitting, scaling, modeling, and evaluation.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">2</span> load and rename</div>
+      <pre>df = pd.read_csv("smmh.csv")
+df.columns = [
+  "Timestamp", "Age", "Gender", "Relationship", "Occupation", "Organization",
+  "Uses_SM", "Platforms", "Avg_Time", "Purposeless", "Distracted_Busy",
+  "Restless", "Easily_Distracted", "Bothered_Worries", "Hard_Concentrate",
+  "Compare_Others", "Feel_Comparisons", "Seek_Validation", "Feel_Depressed",
+  "Interest_Fluctuate", "Sleep_Issues"
+]</pre>
+      <div class="code-note"><code>pd.read_csv()</code> loads the file. <code>df.columns</code> renames all 21 columns from the original verbose survey question text to short identifiers.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">3</span> clean and encode</div>
+      <pre>df.isnull().sum()
+df = df.drop(columns=["Timestamp", "Uses_SM"])
+df = df.dropna()
+time_map = {
+  "Less than an Hour": 0.5, "Between 1 and 2 hours": 1.5,
+  "Between 2 and 3 hours": 2.5, "Between 3 and 4 hours": 3.5,
+  "Between 4 and 5 hours": 4.5, "More than 5 hours": 5.5
+}
+df["Avg_Time"] = df["Avg_Time"].map(time_map)
+df["Gender"] = df["Gender"].map({"Male": 0, "Female": 1, "Nonbinary": 2, "Transgender": 2})
+df["Num_Platforms"] = df["Platforms"].str.split(",").str.len()
+df = df.drop(columns=["Platforms", "Organization", "Relationship", "Occupation"])
+df = df.dropna()</pre>
+      <div class="code-note"><code>isnull().sum()</code> checks for missing values per column (Organization had 30). <code>time_map</code> converts text ranges to numeric midpoints. <code>str.split(",").str.len()</code> counts how many platforms are listed per row.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">4</span> construct target variable</div>
+      <pre>df["MH_Score"] = (df["Bothered_Worries"] + df["Hard_Concentrate"] +
+                  df["Feel_Depressed"] + df["Interest_Fluctuate"] + df["Sleep_Issues"])
+median_score = df["MH_Score"].median()
+df["High_Impact"] = (df["MH_Score"] > median_score).astype(int)</pre>
+      <div class="code-note">Five mental health questions are summed into a composite score (range 5-25). The median of 17 is used as the split point. <code>astype(int)</code> converts True/False to 1/0.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">5</span> split and scale</div>
+      <pre>feature_cols = ["Age", "Gender", "Avg_Time", "Num_Platforms", "Purposeless",
+                "Distracted_Busy", "Restless", "Easily_Distracted",
+                "Compare_Others", "Feel_Comparisons", "Seek_Validation"]
+X = df[feature_cols]
+y = df["High_Impact"]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y)
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)</pre>
+      <div class="code-note"><code>stratify=y</code> keeps the same class ratio in both sets. <code>fit_transform</code> is applied only to training data; <code>transform</code> alone is used on the test set to prevent data leakage.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">6</span> cross-validate three models</div>
+      <pre>lr = LogisticRegression(random_state=42, max_iter=1000)
+lr_scores = cross_val_score(lr, X_train_scaled, y_train, cv=5, scoring="accuracy")
+dt = DecisionTreeClassifier(random_state=42, max_depth=5)
+dt_scores = cross_val_score(dt, X_train_scaled, y_train, cv=5, scoring="accuracy")
+rf = RandomForestClassifier(random_state=42, n_estimators=100, max_depth=5)
+rf_scores = cross_val_score(rf, X_train_scaled, y_train, cv=5, scoring="accuracy")</pre>
+      <div class="code-note"><code>max_depth=5</code> on both tree models limits growth to reduce overfitting. <code>cross_val_score(cv=5)</code> returns an array of five accuracy scores; the mean is reported as the CV accuracy.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">7</span> evaluate on test set</div>
+      <pre>lr.fit(X_train_scaled, y_train)
+lr_pred = lr.predict(X_test_scaled)
+print(classification_report(y_test, lr_pred, target_names=["Low Impact", "High Impact"]))</pre>
+      <div class="code-note"><code>classification_report</code> outputs precision, recall, and F1-score per class. Precision is the share of positive predictions that were correct; recall is the share of actual positives the model caught; F1 is the harmonic mean of both.</div>
+    </div>
+
+    <div class="code-cell">
+      <div class="code-cell-header"><span class="cell-num">8</span> confusion matrix and feature importance</div>
+      <pre>cm = confusion_matrix(y_test, lr_pred)
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+            xticklabels=["Low", "High"], yticklabels=["Low", "High"])
+rf.fit(X_train_scaled, y_train)
+feat_imp = pd.DataFrame({"Feature": feature_cols, "Importance": rf.feature_importances_})
+feat_imp = feat_imp.sort_values("Importance", ascending=False)</pre>
+      <div class="code-note">The confusion matrix breaks predictions into correct and incorrect categories. Feature importances come from the Random Forest, which scores each feature by how much it reduces Gini impurity across all 100 trees.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section id="refs">
+  <div class="container">
+    <div class="section-num">07 / References &amp; AI Use</div>
+    <h2>References</h2>
+
+    <ul class="ref-list">
+      <li id="ref1"><span class="ref-num">1</span> Hunt, M. G., Marx, R., Lipson, C., &amp; Young, J. (2018). No more FOMO: Limiting social media decreases loneliness and depression. <em>Journal of Social and Clinical Psychology, 37</em>(10), 751-768. <a href="https://doi.org/10.1521/jscp.2018.37.10.751" target="_blank">doi.org/10.1521/jscp.2018.37.10.751</a></li>
+      <li id="ref2"><span class="ref-num">2</span> Smith, A., &amp; Anderson, M. (2018). <em>Social media use in 2018.</em> Pew Research Center. <a href="https://www.pewresearch.org/internet/2018/03/01/social-media-use-in-2018/" target="_blank">pewresearch.org</a></li>
+      <li id="ref3"><span class="ref-num">3</span> Associated Press. (2026, March 25). Jury finds Meta and Google liable in social media mental health case, awards $6 million. <em>AP News.</em></li>
+      <li id="ref4"><span class="ref-num">4</span> Ahmed, S. (2023). <em>Social media and mental health</em> [Dataset]. Kaggle. <a href="https://www.kaggle.com/datasets/souvikahmed071/social-media-and-mental-health" target="_blank">kaggle.com</a></li>
+      <li id="ref5"><span class="ref-num">5</span> Vanden Abeele, M. M. P., Beullens, K., &amp; Roe, K. (2013). Measuring mobile phone use: Gender, age and real usage behaviour in relation to different measures of mobile phone use. <em>Mobile Media &amp; Communication, 1</em>(2), 213-236.</li>
+      <li><strong>Tools:</strong> Python 3, pandas, numpy, matplotlib, seaborn, scikit-learn. Ran in Google Colab.</li>
+      <li><a href="https://pandas.pydata.org/docs/" target="_blank">pandas documentation</a> (map, dropna, str.split, isnull, median)</li>
+      <li><a href="https://seaborn.pydata.org/tutorial.html" target="_blank">seaborn documentation</a> (countplot, boxplot, heatmap)</li>
+      <li><a href="https://matplotlib.org/stable/tutorials/index.html" target="_blank">matplotlib documentation</a> (bar charts, figure creation, saving)</li>
+      <li><a href="https://scikit-learn.org/stable/user_guide.html" target="_blank">scikit-learn documentation</a> (LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, train_test_split, cross_val_score, StandardScaler, confusion_matrix, classification_report)</li>
+      <li><strong>Course:</strong> DTSC 2301 lectures and course demos.</li>
+    </ul>
+
+    <h3>AI Transparency</h3>
+    <p>I built this project end to end the data cleaning, feature engineering, model selection, and all the analysis and interpretation are my own work. When I ran into bugs in my code, I used Claude (claude.ai) as a debugging reference, similar to how I would use Stack Overflow or documentation. I also used it to help with some of the HTML and CSS formatting on this page. Every decision about what to include, how to structure the analysis, and what the results mean was made by me, and I reviewed everything before it went in.</p>
+  </div>
+</section>
+
+<footer>HC's Portfolio / DTSC 2301 / Haoran Chen / Spring 2026</footer>
+
+</body>
+</html>
