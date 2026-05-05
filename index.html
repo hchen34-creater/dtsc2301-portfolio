@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HC's Portfolio</title>
+  <style>
+:root {
+  --bg: #080c14;
+  --bg2: #0b111d;
+  --panel: #111827;
+  --panel2: #151e2f;
+  --ink: #f6f8ff;
+  --muted: #9fb2d8;
+  --muted2: #7484a8;
+  --line: #25324a;
+  --line2: #31425f;
+  --blue: #4f8cff;
+  --blue2: #2f6fd6;
+  --green: #00d986;
+  --shadow: 0 26px 70px rgba(0, 0, 0, 0.35);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.72;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--blue); }
+img { max-width: 100%; }
+.container { width: min(980px, calc(100% - 48px)); margin: 0 auto; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(8, 12, 20, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+.nav {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  color: var(--blue);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.navlinks a {
+  padding: 10px 13px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.navlinks a:hover,
+.navlinks a.active {
+  color: var(--blue);
+  border-color: rgba(79, 140, 255, 0.45);
+  background: rgba(79, 140, 255, 0.08);
+}
+.navlinks a.pill {
+  color: white;
+  background: var(--blue);
+  border-color: var(--blue);
+  border-radius: 999px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 800;
+}
+.kicker {
+  display: block;
+  color: var(--green);
+  font-size: 0.78rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 34px;
+}
+.project-kicker {
+  color: var(--blue);
+  font-size: 0.74rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.06;
+  color: var(--ink);
+  margin: 0;
+}
+h1 { font-size: clamp(3rem, 7vw, 5.6rem); letter-spacing: -0.055em; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.04em; }
+h3 { font-size: clamp(1.45rem, 2.4vw, 2.1rem); letter-spacing: -0.035em; }
+p { margin: 0 0 1.05rem; }
+.lead { color: var(--muted); font-size: 1.12rem; max-width: 760px; }
+.small { color: var(--muted2); font-size: 0.94rem; }
+.hero {
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(79, 140, 255, 0.10), transparent 38%),
+    linear-gradient(180deg, rgba(13, 20, 34, 0.5), rgba(8, 12, 20, 0));
+}
+.hero p { margin-left: auto; margin-right: auto; }
+.section { padding: 74px 0; border-bottom: 1px solid var(--line); }
+.section.tight { padding: 52px 0; }
+.section-header { margin-bottom: 32px; }
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+.prose {
+  max-width: 820px;
+  margin: 0 auto;
+}
+.prose p, .prose li { color: #eef3ff; font-size: 1.02rem; }
+.prose .muted { color: var(--muted); }
+.grid { display: grid; gap: 24px; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
+.stat { padding: 22px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
+.stat strong { display: block; font-size: 1.8rem; color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
+.stat span { color: var(--muted); font-size: 0.92rem; }
+.project-card {
+  position: relative;
+  display: block;
+  padding: 38px;
+  min-height: 230px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(79, 140, 255, 0.65);
+  background: var(--panel2);
+}
+.project-card .arrow {
+  position: absolute;
+  top: 38px;
+  right: 38px;
+  color: var(--muted2);
+  font-size: 1.4rem;
+}
+.project-card h3 { margin: 22px 0 20px; }
+.project-card p { color: var(--muted); max-width: 820px; }
+.tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 140, 255, 0.45);
+  background: rgba(79, 140, 255, 0.08);
+  color: var(--blue);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.76rem;
+}
+.callout {
+  margin: 28px 0;
+  padding: 24px 28px;
+  border: 1px solid var(--line2);
+  border-left: 4px solid var(--blue);
+  background: rgba(79, 140, 255, 0.08);
+  border-radius: 14px;
+}
+.callout strong { color: white; }
+.figure-card {
+  margin: 34px 0;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.figure-card img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid var(--line2);
+}
+.caption {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 14px 4px 2px;
+}
+.button-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: white;
+  font-weight: 800;
+  border: 1px solid var(--blue);
+}
+.button.secondary {
+  background: transparent;
+  color: var(--blue);
+  border-color: rgba(79, 140, 255, 0.55);
+}
+.button:hover { color: white; background: var(--blue2); }
+.button.secondary:hover { color: white; background: rgba(79, 140, 255, 0.22); }
+.footer {
+  padding: 44px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+}
+.num-label {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+ul.clean { margin: 12px 0 0 1.2rem; padding: 0; }
+ul.clean li { margin: 0.5rem 0; }
+.quote-box {
+  margin: 28px 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel2);
+  font-style: italic;
+}
+.ref-list { color: var(--muted); font-size: 0.95rem; }
+.ref-list li { margin-bottom: 0.75rem; }
+@media (max-width: 860px) {
+  .container { width: min(100% - 30px, 980px); }
+  .nav { height: auto; padding: 18px 0; align-items: flex-start; flex-direction: column; }
+  .navlinks { gap: 8px; letter-spacing: 0.08em; font-size: 0.72rem; }
+  .hero { min-height: 420px; }
+  .grid.two, .grid.three, .stat-grid { grid-template-columns: 1fr; }
+  .project-card { padding: 28px; }
+  .project-card .arrow { top: 28px; right: 28px; }
+}
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home">HC</a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a class="active" href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container">
+        <span class="kicker">Data Science · Spring 2026</span>
+        <h1>Haoran Chen</h1>
+        <p class="lead">Data science student at UNC Charlotte, exploring what happens when you point analytical tools at questions that actually matter.</p>
+        <div class="tags" style="justify-content:center; margin-top:28px;">
+          <span class="tag">Python</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Social Context</span>
+          <span class="tag">Visualization</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container prose">
+        <div class="section-header">
+          <h2>About Me</h2>
+        </div>
+        <p>My name is Haoran Chen and I am taking data science at UNC Charlotte. Before these classes, I thought data science was mostly about writing code and making charts. It turned out to be a lot more complicated and way more interesting than I expected.</p>
+        <p>I am also in the Army as a reservist, which shapes how I think about problem solving: start with the actual problem before jumping to solutions. That mindset transfers pretty directly to data science.</p>
+        <p>I am drawn to questions about health, behavior, education, and inequality because those are the topics where the data actually affects real people.</p>
+        <div class="stat-grid">
+          <div class="stat"><strong>3</strong><span>Projects</span></div>
+          <div class="stat"><strong>3</strong><span>Blog Posts</span></div>
+          <div class="stat"><strong>DTSC</strong><span>Data science coursework</span></div>
+          <div class="stat"><strong>ML</strong><span>Models with context</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <div class="section-header">
+          <h2>Why This Matters</h2>
+        </div>
+        <p>When people talk about data science, it is easy to imagine something purely technical: code, charts, predictions, and dashboards. The reason I am excited to learn it is that many of the questions I care about are social questions.</p>
+        <p>Education, health, employment, housing, and public policy are all shaped by human decisions and systems. Data science gives us tools to look at patterns across a community instead of only seeing individual cases.</p>
+        <p>At the same time, modeling social topics and people comes with real responsibility. People are not just rows in a spreadsheet, and data is never a perfect mirror of reality. What we measure, how we collect it, and who gets included all matter.</p>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header" style="text-align:center;">
+          <span class="kicker">Work</span>
+          <h2>Projects</h2>
+          <p class="lead">Data science projects from Data Science / Spring 2026</p>
+        </div>
+        <div class="grid" style="max-width:860px; margin:0 auto;">
+          <a class="project-card" href="project1.html">
+            <span class="arrow">↗</span>
+            <span class="project-kicker">Project 01</span>
+            <h3>Video Game Sales Analysis</h3>
+            <p>Looking at how game sales break down by genre and region, and whether genre popularity has shifted over the years. Exploratory data analysis with 4 visualizations on a dataset of about 16,500 games from Kaggle.</p>
+            <div class="tags">
+              <span class="tag">pandas</span>
+              <span class="tag">seaborn</span>
+              <span class="tag">matplotlib</span>
+            </div>
+          </a>
+
+          <a class="project-card" href="project2.html">
+            <span class="arrow">↗</span>
+            <span class="project-kicker">Project 02</span>
+            <h3>Social Media &amp; Mental Health</h3>
+            <p>Can we predict whether someone has high mental health impact from their social media habits? Built and compared 3 machine learning models on survey data from 481 respondents.</p>
+            <div class="tags">
+              <span class="tag">pandas</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">seaborn</span>
+              <span class="tag">matplotlib</span>
+            </div>
+          </a>
+
+          <a class="project-card" href="final_project.html">
+            <span class="arrow">↗</span>
+            <span class="project-kicker">Project 03 / Final Project</span>
+            <h3>Can Your Habits Predict Your GPA?</h3>
+            <p>Using student lifestyle and academic background data to predict pass or fail outcomes. This final project connects model results with fairness, student support, and the limits of predicting academic risk.</p>
+            <div class="tags">
+              <span class="tag">pandas</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">Random Forest</span>
+              <span class="tag">XGBoost</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="blog">
+      <div class="container">
+        <div class="section-header" style="text-align:center;">
+          <span class="kicker">Writing</span>
+          <h2>Blog</h2>
+          <p class="lead">Reflections on data science, social context, and what I am learning</p>
+        </div>
+        <div class="grid three">
+          <article class="card project-card" style="min-height:0;">
+            <span class="project-kicker">Post 01</span>
+            <h3>What Is a Data Science Problem?</h3>
+            <p>Reflecting on what makes a question actually answerable with data, and the difference between a vague idea and a real research problem.</p>
+          </article>
+          <article class="card project-card" style="min-height:0;">
+            <span class="project-kicker">Post 02</span>
+            <h3>Understanding Social Determinants of Health</h3>
+            <p>Looking at how factors outside of individual choices like income, housing, and neighborhood shape health outcomes.</p>
+          </article>
+          <article class="card project-card" style="min-height:0;">
+            <span class="project-kicker">Post 03</span>
+            <h3>Capabilities, Well-being, and What Data Misses</h3>
+            <p>Exploring the capabilities approach and why measuring well-being is harder than it looks.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Haoran Chen · Data Science · Spring 2026</footer>
+</body>
+</html>
